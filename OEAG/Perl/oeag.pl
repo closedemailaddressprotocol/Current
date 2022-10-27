@@ -12,6 +12,7 @@ print($sha_256_b64);
 
 1;
 
-
+#use Digest::SHA qw(hmac_sha256_hex); 
+#$digest=hmac_sha256_hex($all, $secret);
 
 
