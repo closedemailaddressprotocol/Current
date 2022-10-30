@@ -1,14 +1,16 @@
 #!/usr/bin/perl
 
-use warnings;
-use strict;
-use Crypt::Digest::SHA256 qw( sha256 sha256_hex sha256_b64 sha256_b64u
-                             sha256_file sha256_file_hex sha256_file_b64 sha256_file_b64u );
+use Digest::SHA qw(sha256);
 
-my $secret = $ARGV[0];
+my $auth   = $ARGV[0];
 
-my $digest=unpack("H*", sha256_hex(256, $secret));
+$auth=~s/\R//g;
 
-print($digest);
+if ( $auth eq "") {
+	print "usage: oeag <authorization phrase>\n";
+	exit 1;
+}
 
+print unpack("H*", sha256($auth));
 
+1;
