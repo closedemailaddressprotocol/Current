@@ -2,17 +2,13 @@
 
 use warnings;
 use strict;
-use Crypt::Digest::SHA256 qw( sha256_b64);
+use Crypt::Digest::SHA256 qw( sha256 sha256_hex sha256_b64 sha256_b64u
+                             sha256_file sha256_file_hex sha256_file_b64 sha256_file_b64u );
 
-my $sha_256_b64 = sha256_b64($ARGV[0]);
+my $secret = $ARGV[0];
 
-$sha_256_b64 =~ s/[^A-Za-z0-9]//g;
+my $digest=unpack("H*", sha256_hex(256, $secret));
 
-print($sha_256_b64);
-
-1;
-
-#use Digest::SHA qw(hmac_sha256_hex); 
-#$digest=hmac_sha256_hex($all, $secret);
+print($digest);
 
 
