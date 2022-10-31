@@ -1,12 +1,17 @@
 #!/usr/bin/python
-import sys
+import sys;
+import re;
+import hashlib;
 
-
-print("Arguments of the script : " + sys.argv[1]);
-
-if sys.argv[1] == NONE:
-	print ("usage: oeag <authorization phrase>");
+if len(sys.argv) == 1:
+	print ("usage: " + sys.argv[0] + " <authorization phrase>");
 	exit();
 
 
 secret=sys.argv[1];
+
+secret=re.sub('[\r\n]','',secret);
+
+secret = hashlib.sha256(secret.encode('utf-8')).hexdigest();
+
+print(secret);
