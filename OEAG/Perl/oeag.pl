@@ -11,6 +11,11 @@ if ( $auth eq "") {
 	exit 1;
 }
 
-print unpack("H*", sha256($auth));
+
+my $sha64=unpack("H*", sha256($auth));
+
+$sha64=~s/[^A-Za-z0-9]//g;
+
+print $sha64;
 
 1;
